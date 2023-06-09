@@ -3,8 +3,9 @@ import myLogo from '../assets/logo/png/logo-no-background.png';
 import { Link } from 'react-router-dom';
 import {HiOutlineUserCircle} from 'react-icons/hi';
 import {BsCartFill} from 'react-icons/bs';
-import {CiLogin} from 'react-icons/ci';
+import {AiOutlineLogout,AiOutlineLogin} from 'react-icons/ai';
 import {BsBookmarkStar} from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 
 const Header = () => {
@@ -12,6 +13,10 @@ const Header = () => {
     const [showDropdown,setShopDropdown] = useState(false);
     const [showLinks,setShowLinks] = useState(false);
     const menuRef = useRef(null);
+
+    const {user} = useSelector((store) => store.user);
+
+    const handledUser = user ? true:false;
 
     const closeOpenMenus = (e)=>{
       if(menuRef.current && showDropdown && !menuRef.current.contains(e.target)){
@@ -74,9 +79,17 @@ const Header = () => {
                 </ul>
                 <div class="py-2 font-semibold">
 
-                        <Link to={"signup"} class="block flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
-                        <CiLogin className='text-xl' />  Login / Register
-                        </Link>
+
+                        {
+                          handledUser ?  <Link to={"#"} class="block flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
+                          <AiOutlineLogout className='text-xl' />  Logout
+                          </Link>
+                          :
+                          <Link to={"signup"} class="block flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
+                          <AiOutlineLogin className='text-xl' />  Login / Signup
+                          </Link>
+                        }
+                       
 
                   
                 </div>

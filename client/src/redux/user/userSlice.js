@@ -80,11 +80,10 @@ const userSlice = createSlice({
 
         [registerUser.fulfilled] : (state,{payload}) => {
 
-            const {user,msg} = payload;
+            const {msg} = payload;
             state.isLoading = false;
-            state.user = user;
             state.registred = true;
-            toast.success(`${user.firstname} ${user.lastname} ${msg}`,{
+            toast.success(`${msg}`,{
 
                 icon:"👌",
             })
