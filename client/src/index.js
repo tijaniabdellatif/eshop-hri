@@ -19,6 +19,7 @@ import Bookmarks from './pages/Bookmarks';
 import Login from './pages/Login';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import ProtectedRoute from './pages/protectedRoutes/ProtectedRoute';
 
 
    const router = createBrowserRouter(
@@ -31,7 +32,14 @@ import { Provider } from 'react-redux';
             <Route path="contact" element={<Contact />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
-            <Route path="bookmarks" element={<Bookmarks />} />
+         
+            <Route path="bookmarks" element={
+            <ProtectedRoute>
+                <Bookmarks />
+            
+            </ProtectedRoute>
+           
+            } />
             <Route path='*' element={<Error />} />
 
           </Route>
