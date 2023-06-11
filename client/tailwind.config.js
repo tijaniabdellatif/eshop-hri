@@ -26,7 +26,8 @@ module.exports = {
         "primary-text":"#080202",
         "primary-red":"#B31312",
         "darken-orange":"#C77A06",
-        "lighten-black":"rgba(1, 1, 1, 0.5)"
+        "lighten-black":"rgba(1, 1, 1, 0.5)",
+        "lighten-orange":"rgba(255, 210, 86, .5)"
       }
     },
   },

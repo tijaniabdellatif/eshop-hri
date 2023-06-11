@@ -1,6 +1,10 @@
 import { MongoAPIError } from "mongodb";
 import mongoose from "mongoose";
 
+
+/**
+ * Lambda function connection to database on demand
+ */
 let isConnected = false;
 export const connectToDatabase = async () => {
 

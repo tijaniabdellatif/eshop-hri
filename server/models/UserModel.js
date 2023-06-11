@@ -87,6 +87,12 @@ userSchema.pre('save',async function(done){
         this.set('lastname',lastname);
     }
 
+    if(this.isModified('email')){
+
+        const email = this.get('email').toLowerCase();
+        this.set('email', email);
+    }
+
     done();
 })
 

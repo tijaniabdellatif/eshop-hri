@@ -20,6 +20,7 @@ import Login from './pages/Login';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import ProtectedRoute from './pages/protectedRoutes/ProtectedRoute';
+import NewProduct from './pages/NewProduct';
 
 
    const router = createBrowserRouter(
@@ -39,6 +40,14 @@ import ProtectedRoute from './pages/protectedRoutes/ProtectedRoute';
             
             </ProtectedRoute>
            
+            } />
+
+
+            <Route path='newproduct' element={
+
+                <ProtectedRoute>
+                  <NewProduct />
+                </ProtectedRoute>
             } />
             <Route path='*' element={<Error />} />
 

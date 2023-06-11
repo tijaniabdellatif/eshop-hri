@@ -8,7 +8,8 @@ const initialState = {
     isLoading:false,
     user:getStorage('user'),
     token:getStorage('token'),
-    registred:false
+    registred:false,
+    loggedOut:false
 };
 
 
@@ -52,24 +53,73 @@ async(user,thunkAPI) => {
 })
 
 
+export const logOutUser = createAsyncThunk('user/logout',async (user,thunkAPI) => {
+
+
+    try {
+
+
+        const response = await customFetch.post('/api/logout',{},{
+
+              headers:{
+
+                  'Content-Type':'application/json',
+                  'x-auth-token': getStorage('token')
+              }
+        }) 
+
+
+        return response.data;
+
+
+    }catch(error){
+
+        return thunkAPI.rejectWithValue(error.response.data.errors);
+
+    }
+
+})
+
+
 
 const userSlice = createSlice({
 
     name:'user',
     initialState,
-    reducers:{
-
-          logoutUser : (state) =>{
-
-            state.user = null;
-            state.token = null;
-            state.registred = false;
-            removeFromStorage('user');
-            removeFromStorage('token');
-          }
-
-    },
     extraReducers:{
+
+
+        [logOutUser.pending] : (state) => {
+
+                state.isLoading = true;
+                state.loggedOut = true;
+                
+        },
+
+        [logOutUser.fulfilled] : (state,{payload}) => {
+
+                const {message} = payload;
+                state.isLoading = false;
+                state.user = null;
+                state.token=null;
+                state.loggedOut = false;
+                removeFromStorage('user');
+                removeFromStorage('token');
+                
+                toast.success(message,{
+
+                    icon:"👌",
+                })
+
+                
+        },
+
+        [logOutUser.rejected] : (state,{payload}) => {
+
+            state.isLoading = false;
+            console.log(payload);
+
+        },
 
         [registerUser.pending] : (state) => {
 
@@ -122,6 +172,7 @@ const userSlice = createSlice({
         const {user,token,message} = payload;
         console.log(payload);
         state.isLoading = false;
+        state.registred=false;
         state.user = user;
         state.token = token;
 
@@ -152,5 +203,6 @@ const userSlice = createSlice({
 })
 
 
-export const {logoutUser} = userSlice.actions;
+
+
 export default userSlice.reducer;

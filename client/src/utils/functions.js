@@ -2,7 +2,11 @@ export async function imageToBase64(file){
 
 
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+
+   
+    if(file){
+
+        reader.readAsDataURL(file);
 
     const data = new Promise((resolve, reject) => {
 
@@ -11,6 +15,9 @@ export async function imageToBase64(file){
     })
 
     return data;
+
+    }
+    
 
 }
 

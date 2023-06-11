@@ -10,12 +10,10 @@ import { loginUser } from '../redux/user/userSlice';
 const Login = () => {
 
   
+  const navigate = useNavigate();
   const {user,isLoading,token} = useSelector(store => store.user)
   const dispatch = useDispatch();
   const [showPassword,setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
-  
 
 
   const handleShowPassword = () => {
@@ -60,8 +58,8 @@ const handleSubmit = async (e) => {
 useEffect(() => {
   if(token && user){
      setTimeout(() => {
-        navigate('/');
-     },2000) 
+       navigate('/');
+     },950) 
   }
 
 },[token])
@@ -142,7 +140,7 @@ useEffect(() => {
         </form>
         <p style={{zIndex:1000}} className='italic text-medium font-ysabeau'>Already have an account ? <Link className='cursor-pointer text-darken-orange' to="/signup">Sign Up</Link></p>
     </div>
-</section>
+    </section>
   )
 }
 

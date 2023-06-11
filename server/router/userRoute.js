@@ -194,13 +194,20 @@ router.post('/api/login',[
 
 router.post('/api/logout',AuthVerirify,(req,res) => {
 
-
+try {
    res.removeHeader('x-auth-token');
    res.clearCookie('token');
-
    res.status(200).json({
       message:`Logged out successfully`
    })
+
+}catch(error){
+
+     return res.status(500).json({
+       errors:[{msg:error.message}]
+     })
+}
+   
 
 
 });

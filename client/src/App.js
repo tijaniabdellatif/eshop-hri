@@ -4,7 +4,11 @@ import Header from './components/Header';
 import { Toaster, ToastIcon, toast, resolveValue } from "react-hot-toast";
 import { Transition } from '@headlessui/react';
 
+
+
 function App() {
+
+ 
   return (
     <>
     <Toaster  position='top-right'>
@@ -31,9 +35,10 @@ function App() {
     </Toaster>
     <div className="main">
        <Header />
-       <main className='pt-20 bg-slate-100 min-h-[calc(100vh)]' style={{zIndex:100}}>
+       <main className='pt-20 bg-slate-100 min-h-[calc(100vh)]'>
         <Outlet />
        </main>
+
     </div>
     </>
     

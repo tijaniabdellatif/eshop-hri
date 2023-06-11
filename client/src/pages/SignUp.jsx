@@ -10,10 +10,11 @@ import Loader from '../components/Loader';
 
 const SignUp = () => {
 
+ 
   const navigate = useNavigate();
-
-  const {user,isLoading,registred} = useSelector(store => store.user)
+  const {isLoading,registred} = useSelector(store => store.user)
   const dispatch = useDispatch();
+  const [isStrong, initRobustPassword] = useState(null);
 
   const [data,setData] = useState({
 
@@ -124,36 +125,35 @@ const SignUp = () => {
           dispatch(registerUser({
             firstname:data.firstname, 
             lastname:data.lastname,
-             email:data.email,
-              password:data.password,
-              avatar:data.avatar,
-              confirm:data.confirm}))
-         
-         
-
-            
-
-           
-       
+            email:data.email,
+            password:data.password,
+            avatar:data.avatar,
+            confirm:data.confirm}))
+   
   }
-    const [isStrong, initRobustPassword] = useState(null);
+  
     const initPwdInput = async (childData) => {
       initRobustPassword(childData);
     };
+
 
 
     useEffect(() => {
 
         if(registred){
 
-            setTimeout(() => {
+             setTimeout(() => {
 
-                navigate('/login');
+                  navigate('/login');
+             },2000)
+        }
+        else {
 
-            },2000)
+           navigate('/signup');
         }
     },[registred])
 
+   
   
   return (
 

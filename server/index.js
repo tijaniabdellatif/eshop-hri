@@ -1,21 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import userRoute from './router/userRoute.js';
+import productRoute from './router/productRoute.js';
 import 'dotenv/config.js';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
-
-
-
-/**
- * Initialisation and middlewares
- */
 const app = express();
 
 
 const PORT = process.env.PORT || 5001;
-
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieSession({
 
     signed:false,
@@ -24,22 +19,15 @@ app.use(cookieSession({
 
 app.use(cookieParser());
 app.use(cors());
-
-
 app.use(userRoute);
+app.use(productRoute);
 
 
 
 
 
 
-/**
- * Routes 
- */
 
-/**
- * Server listening on ports 
- */
 app.listen(PORT,() => {
      
     console.log(`Server listening on ${PORT}`);
