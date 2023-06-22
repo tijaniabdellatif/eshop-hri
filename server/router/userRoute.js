@@ -161,7 +161,7 @@ router.post('/api/login',[
          id:signedUser.id,
          email:signedUser.email,
         
-      },'secret',{expiresIn:36000},async (err,token) => {
+      },'secret',{expiresIn:'360000s'},async (err,token) => {
    
            if(err) throw err
 
@@ -195,7 +195,7 @@ router.post('/api/login',[
 router.post('/api/logout',AuthVerirify,(req,res) => {
 
 try {
-   res.removeHeader('x-auth-token');
+   
    res.clearCookie('token');
    res.status(200).json({
       message:`Logged out successfully`

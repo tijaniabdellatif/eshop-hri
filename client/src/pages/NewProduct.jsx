@@ -1,13 +1,20 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef,useEffect} from 'react';
 import {MdProductionQuantityLimits} from 'react-icons/md';
 import { imageToBase64 } from '../utils/functions';
 import {FaRegImages} from 'react-icons/fa';
-
+import { categories } from '../utils/constants';
+import { useSelector,useDispatch } from 'react-redux';
+import {createProduct} from '../redux/products/productSlice';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../components/Loader';
 const NewProduct = () => {
 
 
   const inputFileRef = useRef(null);
+  const navigate = useNavigate();
 
+  const {isLoading,created} = useSelector(store => store.product)
+  const dispatch = useDispatch();
   const [data,setData] = useState({
 
     name:"",
@@ -18,11 +25,21 @@ const NewProduct = () => {
  });
 
 
+ const handleChange = (e) => {
+
+  setData((prev) => {
+    return  {
+       ...prev,
+       [e.target.name]:e.target.value
+    }
+  })
+
+ }
+
+
   const uploadFile = async (e) => {
 
     const data = await imageToBase64(e.target.files[0]);
-
-   
     setData((prev) => {
 
         return {
@@ -37,6 +54,44 @@ const NewProduct = () => {
 
 
   }
+
+  const submitHandler = (e) => {
+
+        e.preventDefault();
+        e.persist();
+
+        dispatch(createProduct({
+          name:data.name, 
+          price:data.price,
+          description:data.description,
+          category:data.category,
+          image:data.image}))
+  }
+
+  useEffect(() => {
+
+    if(created){
+
+         setTimeout(() => {
+
+              navigate('/newproduct');
+              setData((prev) => {
+
+                return {
+        
+                     ...prev,
+                     image:'',
+                     description:'',
+                     price:'',
+                     category:'',
+                     name:''
+                }
+        
+            })
+         },100)
+    }
+    
+},[created])
   return (
 
     
@@ -50,7 +105,7 @@ const NewProduct = () => {
           <MdProductionQuantityLimits />
         </div>
 
-            <form  className='font-alegreya w-full py-3 flex flex-col' style={{zIndex:1000}}>
+            <form  onSubmit={submitHandler} className='font-alegreya w-full py-3 flex flex-col' style={{zIndex:1000}}>
                       
                       <label htmlFor='name'>Name <span className='text-red-500 text-xl'> *</span></label>
                       <input 
@@ -60,6 +115,8 @@ const NewProduct = () => {
                       focus-within:outline-sky-500 focus-within:ring-1
                       ' 
                       type={'text'} 
+                      onChange={handleChange}
+                      value={data.name}
                       name="name" 
                       id="name" 
                       placeholder='Your product name' 
@@ -70,12 +127,19 @@ const NewProduct = () => {
             <label htmlFor="category">Select a category<span className='text-red-500 text-xl'> *</span></label>
             <select id="category" name="category" className="mt-1 mb-2 px-2 py-1 
                       rounded-md h-8 outline-0 w-full bg-slate-200/100
-                      focus-within:outline-sky-500 focus-within:ring-1">
+                      focus-within:outline-sky-500 focus-within:ring-1"
+                      onChange={handleChange}
+                      value={data.category}
+                      >
               <option defaultValue={'Choos a category'}>Choose a category</option>
-              <option value="US">Grocery</option>
-              <option value="CA">Cheese</option>
-              <option value="FR">Water & beverage</option>
-            
+                {
+                    categories.map(item => {
+
+                         return(
+                          <option key={item.id} value={item.value}>{item.text}</option>
+                         );
+                    })
+                }
             </select>
 
           
@@ -119,7 +183,8 @@ const NewProduct = () => {
                       name="price" 
                       id="price" 
                       placeholder='Price MAD' 
-                  
+                      onChange={handleChange}
+                      value={data.price}
                       
                       />
 
@@ -134,23 +199,30 @@ const NewProduct = () => {
                       name="description" 
                       id="description"
                       rows={4}
-           
+                      onChange={handleChange}
+                      value={data.description}
                       placeholder='Product description' 
                       >
                      </textarea>
 
+
+                     {
+
+                      isLoading ? <div className='flex items-center justify-center mt-3'><Loader /></div> :
+                      <button  type="submit" className='w-full 
+                      max-w-[150px]
+                      m-auto transition ease-in-out delay-150
+                      font-alegreya  
+                      bg-secondary-orange 
+                      duration-300 rounded-full px-2 py-1 
+                      cursor-pointer
+                      text-white text-bold text-xl 
+                      mt-4
+                      hover:bg-darken-orange 
+                      text-medium text-center'>Submit</button>
+                     }
         
-          <button  type="submit" className='w-full 
-              max-w-[150px]
-              m-auto transition ease-in-out delay-150
-              font-alegreya  
-              bg-secondary-orange 
-              duration-300 rounded-full px-2 py-1 
-              cursor-pointer
-              text-white text-bold text-xl 
-              mt-4
-              hover:bg-darken-orange 
-              text-medium text-center'>Submit</button>
+         
           
           
             </form>

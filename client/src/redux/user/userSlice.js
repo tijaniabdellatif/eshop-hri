@@ -9,7 +9,8 @@ const initialState = {
     user:getStorage('user'),
     token:getStorage('token'),
     registred:false,
-    loggedOut:false
+    loggedOut:false,
+    cookieStorage:null
 };
 
 
@@ -92,7 +93,7 @@ const userSlice = createSlice({
         [logOutUser.pending] : (state) => {
 
                 state.isLoading = true;
-                state.loggedOut = true;
+                state.loggedOut = false;
                 
         },
 
@@ -102,7 +103,8 @@ const userSlice = createSlice({
                 state.isLoading = false;
                 state.user = null;
                 state.token=null;
-                state.loggedOut = false;
+                state.loggedOut = true;
+                state.cookieStorage=null;
                 removeFromStorage('user');
                 removeFromStorage('token');
                 
@@ -117,7 +119,8 @@ const userSlice = createSlice({
         [logOutUser.rejected] : (state,{payload}) => {
 
             state.isLoading = false;
-            console.log(payload);
+            state.loggedOut = false;
+          
 
         },
 
@@ -162,6 +165,7 @@ const userSlice = createSlice({
 
 
              state.isLoading = true;
+             
 
            
         },
@@ -175,7 +179,7 @@ const userSlice = createSlice({
         state.registred=false;
         state.user = user;
         state.token = token;
-
+        state.cookieStorage = token;
         setToLocaStorage('user',user);
         setToLocaStorage('token',token);
         toast.success(`${user.firstname} ${user.lastname} ${message}`,{

@@ -9,7 +9,8 @@ module.exports = {
       fontFamily: {
         ysabeau: ['Ysabeau', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
-        alegreya:['Alegreya Sans','sans-serif']
+        alegreya:['Alegreya Sans','sans-serif'],
+        orbitron:['Orbitron','sans-serif']
       },
 
       animation: {

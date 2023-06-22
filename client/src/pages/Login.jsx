@@ -11,7 +11,7 @@ const Login = () => {
 
   
   const navigate = useNavigate();
-  const {user,isLoading,token} = useSelector(store => store.user)
+  const {user,isLoading,token,cookieStorage} = useSelector(store => store.user)
   const dispatch = useDispatch();
   const [showPassword,setShowPassword] = useState(false);
 
@@ -49,6 +49,8 @@ const handleSubmit = async (e) => {
         password:data.password,
       
       }));
+
+      
    
      
 }
@@ -57,12 +59,15 @@ const handleSubmit = async (e) => {
 
 useEffect(() => {
   if(token && user){
+   
      setTimeout(() => {
        navigate('/');
-     },950) 
+     },1000) 
+
+     document.cookie = `token=${cookieStorage}`
   }
 
-},[token])
+},[])
 
   return (
     <section className='p-3 md:p-4' style={{zIndex:100}}>
