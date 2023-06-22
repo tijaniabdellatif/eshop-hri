@@ -53,8 +53,6 @@ const Header = () => {
 
     <>
 
-    {/* <OverlayLoader speed={600} active={loggedOut ? true:false} /> */}
-    
     <header className='bg-white fixed shadow-md w-full h-20 px-2 py-2 md:px-4 md:py-4' style={{zIndex:100}}>
        {/* Desktop */}
         <div className='flex items-center justify-between h-full'>

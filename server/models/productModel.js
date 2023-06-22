@@ -32,7 +32,37 @@ const productSchema = mongoose.Schema({
           type:String
     }
 
-},{timestamps:true});
+},{
+    
+    timestamps:true,
+    transform(doc,ret){
+
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    
+    }
+
+
+});
+
+productSchema.pre('save',function(done){
+
+   
+
+  if(this.isModified('price')){
+
+      const price = (Math.floor(this.get('price') * 100))/100;
+      this.set('price',price);
+  }
+
+  if(this.isModified('name')){
+
+    const name = this.get('name').toLowerCase();
+    this.set('price',name);
+}
+done();
+})
 
 export const Product = mongoose.model('Product',productSchema);
 

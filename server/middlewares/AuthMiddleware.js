@@ -8,7 +8,7 @@ export const AuthVerirify =  (req,res,next) => {
 
     //check if no token 
 
-    if(!token) {
+    if(token === null) {
 
          return res.status(401).json({
 
@@ -26,7 +26,7 @@ export const AuthVerirify =  (req,res,next) => {
 
      }catch(error){
 
-        res.status(401).json({  message:'token is not valid'});
+        res.status(403).json({  message:'token is not valid'});
 
      }  
 
