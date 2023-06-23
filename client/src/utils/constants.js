@@ -1,7 +1,7 @@
 export const categories = [
 
-      {id:1, value:"marché",text:"Marché"},
-      {id:2,value:"boulangerie",text:"Boulangerie & patisserie"},
+      
+      {id:2,value:"monde bébé",text:"Monde Bébé"},
       {id:3,value:"bio & santé",text:"Bio & santé"},
 
       {id:4,value:"produit laitiers et fromagerie",text:"Produit laitiers, Fromagerie"},
