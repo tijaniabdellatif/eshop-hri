@@ -64,7 +64,7 @@ const Header = () => {
 
 
           <div className="flex items-center gap-4 md:gap-7">
-              <nav className='font-alegreya flex gap-4 md:gap-6 text-base md:text-lg'>
+              <nav className='hidden font-alegreya md:flex gap-4 md:gap-6 text-base md:text-lg'>
                     <Link to={""} className='transition ease-in-out delay-150 duration-500 text-primary-orange hover:text-primary-blue hover:-translate-y-1 hover:scale-110'>HOME</Link>
                     <Link to={"products"} className='transition ease-in-out delay-150 duration-500 text-primary-orange hover:text-primary-blue hover:-translate-y-1 hover:scale-110'>PRODUCTS</Link>
                     <Link to={"about"} className='transition ease-in-out delay-150 duration-500 text-primary-orange hover:text-primary-blue hover:-translate-y-1 hover:scale-110'>ABOUT</Link>
@@ -97,18 +97,29 @@ const Header = () => {
                              {
                               user && 
                                <li>
-                                <Link to={"newproduct"} class="block px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white">New Product</Link>
+                                <Link to={"newproduct"} className="block px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white">New Product</Link>
                               </li>
+               
                              }
                              
                               <li>
                                 {
-                                  user &&  <Link to={"bookmarks"} class="block flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
+                                  user &&  <Link to={"bookmarks"} className="flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
                                   <BsBookmarkStar />Bookmarks
                                     </Link>
                                 }
                                
                               </li>
+
+                               <li>
+
+            <nav className='flex flex-col font-alegreya  gap-  text-base md:text-lg'>
+                <Link to={""} className='block md:hidden px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white'>HOME</Link>
+                <Link to={"products"} className='block md:hidden px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white'>PRODUCTS</Link>
+                <Link to={"about"} className='block md:hidden px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white'>ABOUT</Link>
+                <Link to={"contact"} className='block md:hidden px-4 py-2 hover:bg-primary-orange dark:hover:bg-primary-orange dark:hover:text-white'>CONTACT US</Link>
+          </nav>
+                               </li>
                 </ul>
                 <div class="py-2 font-semibold">
 
@@ -118,7 +129,7 @@ const Header = () => {
                           <AiOutlineLogout className='text-xl' />  Logout
                           </button>
                           :
-                          <Link to={"signup"} class="block flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
+                          <Link to={"signup"} class="flex gap-2 items-center px-4 py-2 text-sm text-gray-700 hover:bg-primary-orange dark:hover:bg-primary-orange dark:text-gray-200 dark:hover:text-white">
                           <AiOutlineLogin className='text-xl' />  Login / Signup
                           </Link>
                         }

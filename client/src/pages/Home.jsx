@@ -47,8 +47,11 @@ const Home = () => {
 
     </div>
 
-  <div className='my-1'>
-    <h2 className='p-2 md:p-4 font-alegreya font-semibold text-3xl text-primary-blue'>Featured Products</h2>
+  <div className='my-1 w-full'>
+
+ 
+    <h2 className='p-2 md:p-4 mb-0.5 font-alegreya font-semibold text-3xl text-primary-blue'>
+      Featured Products</h2>
 
     <CardFeature />
     </div>
