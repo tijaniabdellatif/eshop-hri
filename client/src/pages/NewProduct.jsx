@@ -119,9 +119,7 @@ const NewProduct = () => {
                       value={data.name}
                       name="name" 
                       id="name" 
-                      placeholder='Your product name' 
-                  
-                      
+                      placeholder='Your product name'
                       />
 
             <label htmlFor="category">Select a category<span className='text-red-500 text-xl'> *</span></label>

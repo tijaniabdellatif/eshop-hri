@@ -3,6 +3,7 @@ import {LuBike} from 'react-icons/lu';
 import Card from '../components/Card';
 import Slider from '../components/Slider';
 import CardFeature from '../components/CardFeature';
+import YourProducts from '../components/YourProducts';
 
 const Home = () => {
 
@@ -54,6 +55,12 @@ const Home = () => {
       Featured Products</h2>
 
     <CardFeature />
+    </div>
+
+    <div className='my-3  mb-2 w-full'>
+    <h2 className='p-2 md:p-4 mb-0.5 font-alegreya font-semibold text-3xl text-primary-blue'>
+          Your Products</h2>
+      <YourProducts />
     </div>
     
     </section>

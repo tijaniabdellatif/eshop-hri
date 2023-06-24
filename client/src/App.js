@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
+import "react-tooltip/dist/react-tooltip.css";
 import Header from './components/Header';
 import { Toaster, ToastIcon, toast, resolveValue } from "react-hot-toast";
 import { Transition } from '@headlessui/react';
-import { useDispatch, useSelector } from 'react-redux';
+
 
 
 

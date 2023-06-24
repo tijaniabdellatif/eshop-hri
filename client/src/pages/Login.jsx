@@ -64,7 +64,6 @@ useEffect(() => {
        navigate('/');
      },1000) 
 
-     document.cookie = `token=${cookieStorage}`
   }
 
 },[])
