@@ -18,7 +18,7 @@ export const connectToDatabase = async () => {
 
     try {
 
-        const action = await mongoose.connect(process.env.MONGO_URI,{
+        const action = await mongoose.connect(process.env.MONGO_URL,{
             dbName:"eshop"
         })
 
