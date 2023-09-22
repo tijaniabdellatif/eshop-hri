@@ -22,12 +22,6 @@ app.use(cors());
 app.use(userRoute);
 app.use(productRoute);
 
-
-
-
-
-
-
 app.listen(PORT,() => {
      
     console.log(`Server listening on ${PORT}`);
